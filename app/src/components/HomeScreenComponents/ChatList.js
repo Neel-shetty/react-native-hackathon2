@@ -23,7 +23,8 @@ export default ChatList;
 
 const styles = StyleSheet.create({
   root: {
-    height: 500,
+    // height: 500,
     width: Layout.PaddingH,
+    flex: 1,
   },
 });

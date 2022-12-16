@@ -34,12 +34,14 @@ const styles = StyleSheet.create({
     borderColor: "#E5E5E5",
     borderRadius: 33,
     flexDirection: "row",
-    // opacity: 0.5,
+    marginVertical: 8,
+    alignItems: "center",
   },
   imageContainer: {
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
+    paddingLeft: 8,
   },
   image: {
     height: 62,
@@ -49,7 +51,9 @@ const styles = StyleSheet.create({
   textContainer: {
     flex: 3,
     alignItems: "flex-start",
-    justifyContent: "center",
+    justifyContent: "flex-start",
+    height: 65,
+    paddingLeft: 15,
   },
   name: {
     fontFamily: "poppins-regular",
