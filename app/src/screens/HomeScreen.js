@@ -10,7 +10,9 @@ const HomeScreen = () => {
   return (
     <View style={styles.root}>
       <View style={styles.bg}></View>
-      <View style={{ flex: 1, alignItems:'center',justifyContent:'center'}}>
+      <View style={styles.bgo1}></View>
+      <View style={styles.bgo2}></View>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Header />
       </View>
       <View
@@ -51,6 +53,30 @@ const styles = StyleSheet.create({
     borderRadius: 152,
     transform: [{ rotate: "45deg" }, { translateX: 220 }, { translateY: 220 }],
     bottom: 50,
+  },
+  bgo1: {
+    width: width * 2 * 1.05,
+    // height: height - width * 0.1,
+    height: width * 2 * 1.05,
+    position: "absolute",
+    // backgroundColor: GlobalStyles.colors.blue,
+    borderRadius: 152,
+    transform: [{ rotate: "45deg" }, { translateX: 220 }, { translateY: 220 }],
+    bottom: 50,
+    borderWidth: 1,
+    borderColor: "#EEF2E2",
+  },
+  bgo2: {
+    width: width * 2 * 1.1,
+    // height: height - width * 0.1,
+    height: width * 2 * 1.1,
+    position: "absolute",
+    // backgroundColor: GlobalStyles.colors.blue,
+    borderRadius: 152,
+    transform: [{ rotate: "45deg" }, { translateX: 220 }, { translateY: 220 }],
+    bottom: 50,
+    borderWidth: 1,
+    borderColor: "#EEF2E2",
   },
   heading: {
     fontFamily: "poppins-bold",
