@@ -7,6 +7,7 @@ import { GlobalStyles } from "../components/constants/GlobalStyles";
 import { height, width } from "../components/constants/Layout";
 
 const HomeScreen = () => {
+  //well, wasted a day :)
   return (
     <View style={styles.root}>
       <View style={styles.bg}></View>
