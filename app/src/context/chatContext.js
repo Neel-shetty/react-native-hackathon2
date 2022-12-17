@@ -4,8 +4,9 @@ import { StreamChat } from "stream-chat";
 import { STREAM_ACCESS_KEY } from "@env";
 import { Auth } from "aws-amplify";
 import { useState } from "react";
-import { OverlayProvider, Chat } from "stream-chat-expo";
+import { OverlayProvider, Chat, DeepPartial, Theme } from "stream-chat-expo";
 import { ActivityIndicator } from "react-native";
+import Layout, { width } from "../components/constants/Layout";
 
 const ChatContext = createContext({});
 
@@ -46,9 +47,14 @@ const ChatContextProvider = ({ children }) => {
     return <ActivityIndicator />;
   }
 
-  const value = { chatClient, currentChannel, setCurrentChannel, username:'idk' };
+  const value = {
+    chatClient,
+    currentChannel,
+    setCurrentChannel,
+    username: "idk",
+  };
   return (
-    <OverlayProvider>
+    <OverlayProvider value={{ style: theme }}>
       <Chat client={chatClient}>
         <ChatContext.Provider value={value}>{children}</ChatContext.Provider>
       </Chat>
@@ -59,3 +65,39 @@ const ChatContextProvider = ({ children }) => {
 export const useChatContext = () => useContext(ChatContext);
 
 export default ChatContextProvider;
+
+const theme: DeepPartial<Theme> = {
+  channelPreview: {
+    container: {
+      height: 103.45,
+      // width: Layout.PaddingH,
+      backgroundColor: "rgba(255, 255, 255, 0.6)",
+      borderWidth: 1,
+      borderColor: "#E5E5E5",
+      borderRadius: 33,
+      // flexDirection: "row",
+      marginVertical: 8,
+      marginHorizontal: width - Layout.PaddingH - 20,
+      // alignItems: "center",
+    },
+    title: {
+      fontFamily: "poppins-regular",
+      fontSize: 12.8,
+      color: "black",
+      fontWeight:'500'
+    },
+    message: {
+      fontFamily: "poppins-regular",
+      fontSize: 12.8,
+      color: "#656565",
+    },
+    contentContainer:{
+      // backgroundColor:'red'
+    }
+  },
+  channel: {
+    selectChannel: {
+      // alignItems:'center'
+    },
+  },
+};
