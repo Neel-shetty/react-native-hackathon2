@@ -8,14 +8,12 @@ import { width } from "../../components/constants/Layout";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 
-// SplashScreen.preventAutoHideAsync();
 
 const HomeScreen = () => {
   const [fontsLoaded] = useFonts({
     "poppins-regular": require("../../../assets/fonts/Poppins/Poppins-Regular.ttf"),
     "poppins-bold": require("../../../assets/fonts/Poppins/Poppins-Bold.ttf"),
-  })
-
+  });
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
       await SplashScreen.hideAsync();

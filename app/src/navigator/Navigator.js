@@ -6,6 +6,8 @@ import HomeScreen from "../screens/MainScreens/HomeScreen";
 import SignUpScreen from "../screens/LoginScreens/SignUpScreen";
 import { Amplify, Auth, Hub } from "aws-amplify";
 import awsconfig from "../aws-exports";
+import DmScreen from "../screens/MainScreens/DmScreen";
+import ChatContextProvider from "../context/chatContext";
 
 Amplify.configure(awsconfig);
 
@@ -50,19 +52,24 @@ const Navigator = () => {
   }, []);
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="HomeScreen">
-        {user ? (
-          <Stack.Screen
-            name="HomeScreen"
-            component={HomeScreen}
-            options={{ headerShown: false }}
-          />
-        ) : (
-          <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ChatContextProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="HomeScreen">
+          {user ? (
+            <>
+              <Stack.Screen
+                name="HomeScreen"
+                component={HomeScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen name="Dm" component={DmScreen} />
+            </>
+          ) : (
+            <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ChatContextProvider>
   );
 };
 
