@@ -1,15 +1,32 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useCallback } from "react";
 import Header from "../components/HomeScreenComponents/Header";
 import Search from "../components/HomeScreenComponents/Search";
 import ChatList from "../components/HomeScreenComponents/ChatList";
 import { GlobalStyles } from "../components/constants/GlobalStyles";
 import { height, width } from "../components/constants/Layout";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+
+SplashScreen.preventAutoHideAsync();
 
 const HomeScreen = () => {
-  //well, wasted a day :)
+  const [fontsLoaded] = useFonts({
+    "poppins-regular": require("../../assets/fonts/Poppins/Poppins-Regular.ttf"),
+    "poppins-bold": require("../../assets/fonts/Poppins/Poppins-Bold.ttf"),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
-    <View style={styles.root}>
+    <View style={styles.root} onLayout={onLayoutRootView}>
       <View style={styles.bg}></View>
       <View style={styles.bgo1}></View>
       <View style={styles.bgo2}></View>
