@@ -10,6 +10,11 @@
       "StackName": "amplify-grammar-staging-45737",
       "StackId": "arn:aws:cloudformation:ap-south-1:392685387808:stack/amplify-grammar-staging-45737/53cc1140-7dc7-11ed-b669-0a0186afe91e",
       "AmplifyAppId": "d29tpq6x7y1ujr"
+    },
+    "categories": {
+      "auth": {
+        "grammar": {}
+      }
     }
   }
 }
