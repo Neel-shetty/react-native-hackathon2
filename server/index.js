@@ -3,6 +3,7 @@ const express = require("express");
 require("dotenv").config();
 const fs = require("fs");
 
+
 const app = express();
 
 const SAPLING_API_URL = "https://api.sapling.ai/api/v1/edits";
@@ -12,13 +13,17 @@ app.use(express.json());
 // console.log(process.env.SAPLING_API_KEY);
 
 app.post("/api/v1/edits", (req, res, next) => {
-  // req.body.key = apiKey; // Set the API key
-  const data = {
-    "key": apiKey,
-    "text": "i are neel",
-    "session_id": "test Document UUID",
-  };
-  req.body = JSON.stringify(data);
+  req.body.key = apiKey; // Set the API key
+  // if(!apiKey){
+  //   return
+  // }
+  // const data = {
+  //   "key": apiKey,
+  //   "text": "i are neel",
+  //   "session_id": "test Document UUID",
+  // };
+  // req.body = data;
+
   axios({
     url: SAPLING_API_URL, // Pass request onto Sapling servers
     data: req.body,

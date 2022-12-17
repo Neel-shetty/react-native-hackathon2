@@ -62,7 +62,13 @@ const Navigator = () => {
                 component={HomeScreen}
                 options={{ headerShown: false }}
               />
-              <Stack.Screen name="Dm" component={DmScreen} />
+              <Stack.Screen
+                name="Dm"
+                component={DmScreen}
+                options={{
+                  headerShown:false
+                }}
+              />
             </>
           ) : (
             <Stack.Screen name="SignUpScreen" component={SignUpScreen} />

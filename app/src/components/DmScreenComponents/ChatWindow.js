@@ -15,13 +15,19 @@ const ChatWindow = () => {
   }, [currentChannel.data.name]);
 
   return (
-    <Channel channel={currentChannel}>
-      <MessageList />
-      <MessageInput />
-    </Channel>
+    <View style={styles.root}>
+      <Channel channel={currentChannel}>
+        <MessageList />
+        <MessageInput />
+      </Channel>
+    </View>
   );
 };
 
 export default ChatWindow;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
+});

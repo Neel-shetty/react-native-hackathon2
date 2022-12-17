@@ -27,8 +27,9 @@ const ChatContextProvider = ({ children }) => {
         client.devToken(username)
       );
       setChatClient(client);
-      const globalChat = client.channel("livestream", "global", {
-        name: "testgroup",
+      const globalChat = client.channel("team", "testteam", {
+        name: "new team",
+        image: "https://randomuser.me/api/portraits/med/women/76.jpg",
       });
       await globalChat.watch();
     };
@@ -66,7 +67,46 @@ export const useChatContext = () => useContext(ChatContext);
 
 export default ChatContextProvider;
 
+const size = 62;
+
 const theme: DeepPartial<Theme> = {
+  avatar: {
+    container: {
+      width: 68.53,
+      height: 65.64,
+      // backgroundColor: "red",
+      borderWidth: 1,
+      borderRadius: 35,
+    },
+    BASE_AVATAR_SIZE: 72,
+    image: {
+      height: 62,
+      width: 62,
+    },
+  },
+  groupAvatar: {
+    container: {
+      height: 66,
+      width: 66,
+    },
+    image: {
+      height: 62,
+      width: 62,
+    },
+  },
+  channel:{
+    selectChannel:{
+      backgroundColor:'red'
+    }
+  },
+  channelListMessenger: {
+    flatListContent: {
+      backgroundColor: "rgba(0,0,0,0)",
+    },
+    flatList: {
+      backgroundColor: "rgba(0,0,0,0)",
+    },
+  },
   channelPreview: {
     container: {
       height: 103.45,
@@ -78,22 +118,28 @@ const theme: DeepPartial<Theme> = {
       // flexDirection: "row",
       marginVertical: 8,
       marginHorizontal: width - Layout.PaddingH - 20,
-      // alignItems: "center",
+      alignItems: "center",
     },
     title: {
       fontFamily: "poppins-regular",
-      fontSize: 12.8,
+      fontSize: 14.8,
       color: "black",
-      fontWeight:'500'
+      fontWeight: "600",
     },
     message: {
       fontFamily: "poppins-regular",
       fontSize: 12.8,
       color: "#656565",
     },
-    contentContainer:{
+    contentContainer: {
+      alignItems: "flex-start",
+      justifyContent: "flex-start",
+      height: 65,
       // backgroundColor:'red'
-    }
+    },
+    date: {
+      display: "none",
+    },
   },
   channel: {
     selectChannel: {
