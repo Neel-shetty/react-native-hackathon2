@@ -4,11 +4,14 @@ import { StreamChat } from "stream-chat";
 import { STREAM_ACCESS_KEY } from "@env";
 import { Auth } from "aws-amplify";
 import { useState } from "react";
+import { OverlayProvider, Chat } from "stream-chat-expo";
+import { ActivityIndicator } from "react-native";
 
 const ChatContext = createContext({});
 
 const ChatContextProvider = ({ children }) => {
   const [chatClient, setChatClient] = useState();
+  const [currentChannel, setCurrentChannel] = useState();
   useEffect(() => {
     const initChat = async () => {
       const client = StreamChat.getInstance(STREAM_ACCESS_KEY);
@@ -23,6 +26,10 @@ const ChatContextProvider = ({ children }) => {
         client.devToken(username)
       );
       setChatClient(client);
+      const globalChat = client.channel("livestream", "global", {
+        name: "testgroup",
+      });
+      await globalChat.watch();
     };
     initChat();
   }, []);
@@ -35,8 +42,18 @@ const ChatContextProvider = ({ children }) => {
     };
   }, []);
 
-  const value = { username: "cyka blyat" };
-  return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;
+  if (!chatClient) {
+    return <ActivityIndicator />;
+  }
+
+  const value = { chatClient, currentChannel, setCurrentChannel, username:'idk' };
+  return (
+    <OverlayProvider>
+      <Chat client={chatClient}>
+        <ChatContext.Provider value={value}>{children}</ChatContext.Provider>
+      </Chat>
+    </OverlayProvider>
+  );
 };
 
 export const useChatContext = () => useContext(ChatContext);

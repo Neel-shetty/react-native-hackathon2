@@ -7,7 +7,7 @@ import { GlobalStyles } from "../../components/constants/GlobalStyles";
 import { width } from "../../components/constants/Layout";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-
+import StreamChatList from "../../components/HomeScreenComponents/StreamChatList";
 
 const HomeScreen = () => {
   const [fontsLoaded] = useFonts({
@@ -44,8 +44,9 @@ const HomeScreen = () => {
         </View>
         <Search />
       </View>
-      <View style={{ flex: 8 }}>
-        <ChatList />
+      <View style={{ flex: 8, width:width }}>
+        {/* <ChatList /> */}
+        <StreamChatList />
       </View>
     </View>
   );
