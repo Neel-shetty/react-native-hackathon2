@@ -9,9 +9,9 @@ const StreamChatList = () => {
 
   const navigation = useNavigation();
 
-  function channelButton(channel) {
+  async function channelButton(channel) {
     setCurrentChannel(channel);
-    navigation.navigate("Dm");
+    navigation.navigate("Dm")
   }
   return (
     <View style={{ flex: 1 }}>

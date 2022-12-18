@@ -15,12 +15,7 @@ const Stack = createNativeStackNavigator();
 
 const Navigator = () => {
   const [user, setUser] = useState(null);
-  // console.log("🚀 ~ file: SignUpScreen.js:10 ~ SignUpScreen ~ user", user);
   const [customState, setCustomState] = useState(null);
-  // console.log(
-  // "🚀 ~ file: SignUpScreen.js:12 ~ SignUpScreen ~ setCustomState",
-  // setCustomState
-  // );
 
   useEffect(() => {
     const unsubscribe = Hub.listen("auth", ({ payload: { event, data } }) => {
@@ -40,42 +35,52 @@ const Navigator = () => {
       .catch(() => console.log("Not signed in"));
     async function ui() {
       const userInfo = await Auth.currentUserInfo();
-      // console.log(
-      // "🚀 ~ file: SignUpScreen.js:35 ~ useEffect ~ userInfo",
-      // userInfo
-      // );
+      console.log(
+        "🚀 ~ file: SignUpScreen.js:35 ~ useEffect ~ userInfo",
+        userInfo
+      );
     }
     if (user) {
-      ui();
+      // ui();
     }
     return unsubscribe;
   }, []);
 
-  return (
-    <ChatContextProvider>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="HomeScreen">
-          {user ? (
-            <>
-              <Stack.Screen
-                name="HomeScreen"
-                component={HomeScreen}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="Dm"
-                component={DmScreen}
-                options={{
-                  headerShown:false
-                }}
-              />
-            </>
-          ) : (
-            <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-          )}
+  const AuthenticatedStack = () => {
+    return (
+      <ChatContextProvider>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="HomeScreen"
+            component={HomeScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Dm"
+            component={DmScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
         </Stack.Navigator>
-      </NavigationContainer>
-    </ChatContextProvider>
+      </ChatContextProvider>
+    );
+  };
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="AuthStack">
+        {user ? (
+          <Stack.Screen
+            name="AuthStack"
+            component={AuthenticatedStack}
+            options={{ headerShown: false }}
+          />
+        ) : (
+          <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 

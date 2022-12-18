@@ -10,19 +10,12 @@ const DmScreen = () => {
   const apikey = SAPLING_API_KEY;
   const client = new Client(apikey);
 
-  async function OnPress() {
-    // client.edits("I are neel").then(function (response) {
-    //   console.log(response.data);
-    // });
-  }
-
   return (
     <View style={styles.root}>
       <View style={styles.headerContainer}>
         <Header />
       </View>
       <View style={styles.chatContainer}>
-        <Button title="test" onPress={OnPress}/>
         <ChatWindow />
       </View>
     </View>
@@ -38,10 +31,10 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     flex: 1,
-    minHeight: 256,
+    // minHeight: 135,
     // backgroundColor:'pink'
   },
   chatContainer: {
-    flex: 9,
+    flex: 3,
   },
 });

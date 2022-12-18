@@ -5,18 +5,23 @@ import { STREAM_ACCESS_KEY } from "@env";
 import { Auth } from "aws-amplify";
 import { useState } from "react";
 import { OverlayProvider, Chat, DeepPartial, Theme } from "stream-chat-expo";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import Layout, { width } from "../components/constants/Layout";
+import { useNavigation } from "@react-navigation/native";
+// import * as AWS from 'aws-sdk/dist/aws-sdk-react-native'
 
 const ChatContext = createContext({});
 
 const ChatContextProvider = ({ children }) => {
   const [chatClient, setChatClient] = useState();
   const [currentChannel, setCurrentChannel] = useState();
+  const [globalChat, setGlobalChat] = useState();
+  const navigation = useNavigation();
+
+  //connect user and start global chat
   useEffect(() => {
     const initChat = async () => {
       const client = StreamChat.getInstance(STREAM_ACCESS_KEY);
-
       const { username } = await Auth.currentUserInfo();
       await client.connectUser(
         {
@@ -27,7 +32,7 @@ const ChatContextProvider = ({ children }) => {
         client.devToken(username)
       );
       setChatClient(client);
-      const globalChat = client.channel("team", "testteam", {
+      const globalChat = client.channel("livestream", "global", {
         name: "new team",
         image: "https://randomuser.me/api/portraits/med/women/76.jpg",
       });
@@ -44,13 +49,30 @@ const ChatContextProvider = ({ children }) => {
     };
   }, []);
 
-  function startPrivateChat(chatWithUser) {
+  //start dm chat
+  async function startPrivateChat(chatWithUser) {
     console.log("starting chat room with", user);
-    const newChannel = chatClient.channel("messaging",{members:[chatClient.userID,]})
+    const newChannel = chatClient.channel("messaging", {
+      members: [chatClient.userID, chatWithUser.id],
+    });
+    await newChannel.watch();
+    setCurrentChannel(newChannel);
+    navigation.navigate("Dm");
   }
 
   if (!chatClient) {
-    return <ActivityIndicator />;
+    return (
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "white",
+        }}
+      >
+        <ActivityIndicator />
+      </View>
+    );
   }
 
   const value = {
@@ -72,7 +94,6 @@ export const useChatContext = () => useContext(ChatContext);
 
 export default ChatContextProvider;
 
-const size = 62;
 
 const theme: DeepPartial<Theme> = {
   avatar: {
@@ -149,6 +170,47 @@ const theme: DeepPartial<Theme> = {
   channel: {
     selectChannel: {
       // alignItems:'center'
+    },
+  },
+  messageSimple: {
+    container: {
+      // backgroundColor:'red'
+    },
+    card: {
+      container: {
+        // backgroundColor: "red",
+        // borderWidth: 2,
+      },
+    },
+  },
+  messageList: {
+    container: {
+      backgroundColor: "white",
+    },
+    messageSystem: {
+      container: {
+        // backgroundColor:'violet'
+      },
+      line: {
+        // backgroundColor:'red'
+      },
+      text: {
+        fontFamily: "poppins-regular",
+        fontSize: 12.8,
+        color: "#656565",
+      },
+      textContainer: {},
+    },
+    contentContainer: {
+      // backgroundColor:'red',
+    },
+    listContainer: {
+      // backgroundColor:'violet',
+    },
+  },
+  reply: {
+    container: {
+      backgroundColor: "cyan",
     },
   },
 };

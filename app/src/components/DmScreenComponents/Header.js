@@ -7,7 +7,7 @@ import { useChatContext } from "../../context/chatContext";
 import { useNavigation } from "@react-navigation/native";
 
 const Header = () => {
-  const { currentChannel } = useChatContext();
+  const { currentChannel,setCurrentChannel } = useChatContext();
   // console.log("🚀 ~ file: Header.js:10 ~ Header ~ currentChannel", currentChannel.data.image)
   const navigation = useNavigation();
   function backButton() {
@@ -15,17 +15,17 @@ const Header = () => {
   }
   return (
     <View style={styles.root}>
-      <View style={styles.backContainer}>
+      {/* <View style={styles.backContainer}>
         <TouchableOpacity onPress={backButton}>
           <Ionicons name="arrow-back" size={35} />
         </TouchableOpacity>
-      </View>
+      </View> */}
       <View style={styles.container}>
         <View style={styles.imageContainer}>
           <View style={styles.circle}>
             <Image
               source={{
-                uri: currentChannel.data.image,
+                uri: currentChannel?.data?.image,
               }}
               style={{ height: 71.67, width: 69.7, borderRadius: 75 }}
             />
@@ -44,13 +44,13 @@ export default Header;
 
 const styles = StyleSheet.create({
   root: {
-    height: 255,
+    height: 135,
     width: width - width * 0.06,
     backgroundColor: GlobalStyles.colors.blue,
     alignSelf: "center",
     marginTop: 30,
     borderRadius: 34,
-    // alignItems:'center',
+    alignItems:'center',
     justifyContent: "center",
   },
   backContainer: {
@@ -64,14 +64,18 @@ const styles = StyleSheet.create({
   },
   container: {
     flexDirection: "row",
-    flex: 5,
+    // flex: 5,
     paddingBottom: 20,
+    alignItems:'center',
+    justifyContent:'center',
+    // backgroundColor:'red'
   },
   imageContainer: {
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
-    transform: [{ rotate: "-45deg" }],
+    transform: [{ rotate: "-45deg" },{translateX:-10},{translateY:10}],
+    // backgroundColor:'violet'
   },
   circle: {
     marginLeft: 20,

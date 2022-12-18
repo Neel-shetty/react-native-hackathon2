@@ -19,6 +19,7 @@
     "@saplingai/sapling-js": "^1.0.7",
     "aws-amplify": "^5.0.7",
     "aws-amplify-react-native": "^7.0.2",
+    "aws-sdk": "^2.1277.0",
     "axios": "^1.2.1",
     "expo": "~47.0.8",
     "expo-av": "^13.0.2",
