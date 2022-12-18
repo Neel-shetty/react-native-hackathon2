@@ -18,7 +18,7 @@ const ChatWindow = () => {
     <View style={styles.root}>
       <Channel channel={currentChannel}>
         <MessageList />
-        <MessageInput />
+        <MessageInput watchers={(data)=>{console.log(data)}} />
       </Channel>
     </View>
   );

@@ -1,4 +1,6 @@
 import "react-native-gesture-handler";
+import "react-native-get-random-values";
+import "@saplingai/sapling-js";
 import Navigator from "./src/navigator/Navigator";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 

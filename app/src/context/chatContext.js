@@ -44,6 +44,11 @@ const ChatContextProvider = ({ children }) => {
     };
   }, []);
 
+  function startPrivateChat(chatWithUser) {
+    console.log("starting chat room with", user);
+    const newChannel = chatClient.channel("messaging",{members:[chatClient.userID,]})
+  }
+
   if (!chatClient) {
     return <ActivityIndicator />;
   }
@@ -94,10 +99,10 @@ const theme: DeepPartial<Theme> = {
       width: 62,
     },
   },
-  channel:{
-    selectChannel:{
-      backgroundColor:'red'
-    }
+  channel: {
+    selectChannel: {
+      backgroundColor: "red",
+    },
   },
   channelListMessenger: {
     flatListContent: {
